@@ -29,7 +29,7 @@ const sendConfirmationEmail = async (name, email, role) => {
       to_email:     email,
       student_name: name,
       subject:      "ProveIt! Beta — We've Received Your Application",
-      message:      `Hi ${name},\n\nThank you for applying to the ProveIt! Beta Programme!\n\nWe are currently reviewing applications to match ${role === "parent" ? "your child" : "you"} with the right tutor. We will confirm your free 2-week slot within 24 hours.\n\nIn the meantime, if you have any questions, reach us at help.proveit@yahoo.com\n\nThe ProveIt! Team`,
+      message:      `Thank you for applying to the ProveIt! Beta Programme!\n\nWe are currently reviewing applications to match ${role === "parent" ? "your child" : "you"} with the right tutor. We will confirm your free 2-week slot within 24 hours.\n\nIn the meantime, if you have any questions, reach us at help.proveit@yahoo.com\n\nThe ProveIt! Team`,
       app_url:      window.location.origin,
     });
   } catch(e) { console.error("Email error:", e); }
@@ -335,9 +335,9 @@ const MutualAgreement = () => {
 // ─── SUBJECTS ─────────────────────────────────────────────────────────────────
 const Subjects = () => {
   const subjects = [
-    { emoji:"∫", name:"Mathematics", desc:"Functions, calculus, algebra, trigonometry, statistics and more — aligned to the NSC curriculum.", color:T.teal, topics:["Algebra & Functions","Calculus","Trigonometry","Statistics & Probability","Geometry"] },
-    { emoji:"⚡", name:"Physics", desc:"Mechanics, electricity, waves, and modern physics — built around understanding, not memorisation.", color:T.accent, topics:["Newton's Laws","Electricity & Magnetism","Waves & Optics","Thermodynamics","Modern Physics"] },
-    { emoji:"⚗️", name:"Chemistry", desc:"Organic, inorganic, physical chemistry — with worked examples and practical exam strategies.", color:"#22C55E", topics:["Organic Chemistry","Electrochemistry","Chemical Equilibrium","Acid-Base Reactions","Stoichiometry"] },
+    { emoji:"∫", name:"Mathematics", desc:"Functions, calculus, algebra, trigonometry, statistics and more — aligned to the NSC curriculum.", color:T.teal, topics:["Algebra & Functions","Calculus","Trigonometry","Statistics & Probability","Geometry","AND MORE!"] },
+    { emoji:"⚡", name:"Physics", desc:"Mechanics, electricity, waves, and modern physics — built around understanding, not memorisation.", color:T.accent, topics:["Newton's Laws","Electricity & Magnetism","Waves & Optics","Thermodynamics","Modern Physics","AND MORE!"] },
+    { emoji:"⚗️", name:"Chemistry", desc:"Organic, inorganic, physical chemistry — with worked examples and practical exam strategies.", color:"#22C55E", topics:["Organic Chemistry","Electrochemistry","Chemical Equilibrium","Acid-Base Reactions","Stoichiometry","AND MORE!"] },
   ];
 
   return (
@@ -504,7 +504,7 @@ const ApplicationForm = () => {
             Thank you, <strong style={{ color:T.white }}>{form.name}</strong>. We've received your application and sent a confirmation to <strong style={{ color:T.teal }}>{form.email}</strong>.
           </p>
           <p style={{ fontSize:15, color:T.whiteDim, lineHeight:1.75, marginBottom:32 }}>
-            We review applications individually and will confirm your slot <strong style={{ color:T.white }}>within 24 hours</strong>. Keep an eye on your inbox — including your spam folder.
+            Kidly check your Spam folder and report as not spam. We review applications individually and will confirm your slot <strong style={{ color:T.white }}>within 24 hours</strong>. Keep an eye on your inbox — including your spam folder.
           </p>
           <div style={{ padding:"20px 24px", background:T.tealGlow, border:`1px solid ${T.glassBorder}`, borderRadius:12, marginBottom:28 }}>
             <p style={{ fontSize:14, color:T.whiteDim }}>

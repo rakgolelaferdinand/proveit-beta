@@ -4,9 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 const CONFIG = {
   totalSlots:        100,   // total applications before form closes
   acceptedSlots:     80,    // how many will actually be accepted
-  applicationsCount: 23,    // UPDATE THIS NUMBER as applications come in
-  driveUploadLink:   "https://drive.google.com/drive/folders/YOUR_FOLDER_ID_HERE",
-  sheetsWebhook:     "YOUR_GOOGLE_APPS_SCRIPT_WEBHOOK_URL_HERE",
+  applicationsCount: 00,    // UPDATE THIS NUMBER as applications come in
+  sheetsWebhook:     "https://script.google.com/macros/s/AKfycbyUHWIJFicss4f-1gnKycvE_kJAafmVVXYMYvfrbPWphXxpw6X4QZTAjNj1rhH2akiphw/exec",
   emailjsPublicKey:  "6KYo6SqjlDABOmVpE",
   emailjsServiceId:  "proveit_gmail",
   emailjsTemplateId: "proveit_notify",
@@ -43,9 +42,33 @@ const submitToSheets = async (data) => {
       method: "POST",
       mode: "no-cors",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ action: "submitForm", ...data }),
     });
   } catch(e) { console.error("Sheets error:", e); }
+};
+
+const uploadReportToDrive = async (file, applicantName) => {
+  if (!CONFIG.sheetsWebhook || CONFIG.sheetsWebhook.includes("YOUR_")) return;
+  if (!file) return;
+  try {
+    const base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(",")[1]);
+      reader.onerror = () => reject(new Error("File read failed"));
+      reader.readAsDataURL(file);
+    });
+    await fetch(CONFIG.sheetsWebhook, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        action:        "uploadReport",
+        fileName:      `${applicantName} — School Report.pdf`,
+        mimeType:      file.type || "application/pdf",
+        base64Data:    base64,
+      }),
+    });
+  } catch(e) { console.error("Drive upload error:", e); }
 };
 
 // ─── DESIGN TOKENS ────────────────────────────────────────────────────────────
@@ -390,7 +413,7 @@ const ApplicationForm = () => {
   const [form, setForm] = useState({
     name:"", email:"", phone:"", role:"",
     grade:"", subjects:[], devices:[], commitment:false,
-    hearAbout:"", reportUploaded:false,
+    hearAbout:"", reportFile:null,
   });
   const [errors,    setErrors]    = useState({});
   const [step,      setStep]      = useState(1); // 1=basic, 2=details, 3=confirm
@@ -452,11 +475,14 @@ const ApplicationForm = () => {
       subjects:    form.subjects.join(", "),
       devices:     form.devices.join(", "),
       hearAbout:   form.hearAbout,
-      reportUploaded: form.reportUploaded ? "Yes" : "No",
+      reportUploaded: form.reportFile ? "Yes" : "No",
       status:      "Pending",
       date:        new Date().toLocaleDateString("en-ZA"),
     };
     await submitToSheets(payload);
+    if (form.reportFile) {
+      await uploadReportToDrive(form.reportFile, form.name);
+    }
     await sendConfirmationEmail(form.name, form.email, form.role);
     setSubmitting(false);
     setSubmitted(true);
@@ -482,8 +508,10 @@ const ApplicationForm = () => {
           </p>
           <div style={{ padding:"20px 24px", background:T.tealGlow, border:`1px solid ${T.glassBorder}`, borderRadius:12, marginBottom:28 }}>
             <p style={{ fontSize:14, color:T.whiteDim }}>
-              📬 Confirmation sent from <strong style={{ color:T.teal }}>proveit.updates@gmail.com</strong><br/>
-              📎 Don't forget to upload your school report: <a href={CONFIG.driveUploadLink} target="_blank" rel="noreferrer" style={{ color:T.teal }}>Click here to upload →</a>
+              📬 Confirmation sent from <strong style={{ color:T.teal }}>proveit.updates@gmail.com</strong>
+              {form.reportFile && (
+                <><br/>📎 School report received — we'll use it to personalise your sessions.</>
+              )}
             </p>
           </div>
           <p style={{ fontSize:13, color:T.whiteDim }}>Questions? Email us at <a href="mailto:help.proveit@yahoo.com" style={{ color:T.teal }}>help.proveit@yahoo.com</a></p>
@@ -644,23 +672,47 @@ const ApplicationForm = () => {
               </div>
 
               <div>
-                <label>School Report</label>
-                <div style={{ padding:"20px", borderRadius:12, border:`2px dashed ${T.glassBorder}`, textAlign:"center", background:"rgba(255,255,255,.02)" }}>
-                  <div style={{ fontSize:28, marginBottom:8 }}>📄</div>
-                  <p style={{ fontSize:13, color:T.whiteDim, lineHeight:1.6, marginBottom:12 }}>
-                    Upload your most recent school report to a shared Google Drive folder.<br/>
-                    <span style={{ fontSize:11 }}>This helps us personalise your sessions and measure your progress.</span>
-                  </p>
-                  <a href={CONFIG.driveUploadLink} target="_blank" rel="noreferrer" className="btn-ghost" style={{ textDecoration:"none", padding:"9px 20px", fontSize:13 }}>
-                    Upload Report to Drive →
-                  </a>
-                  <div style={{ marginTop:14 }}>
-                    <label style={{ display:"flex", alignItems:"center", gap:8, textTransform:"none", letterSpacing:0, fontSize:13, fontWeight:400, justifyContent:"center", cursor:"pointer" }}>
-                      <input type="checkbox" checked={form.reportUploaded} onChange={e=>set("reportUploaded",e.target.checked)} style={{ width:"auto", accentColor:T.teal }}/>
-                      I've uploaded my school report ✓
-                    </label>
-                  </div>
-                  <p style={{ fontSize:11, color:T.whiteDim, marginTop:8 }}>Optional but strongly encouraged</p>
+                <label>School Report <span style={{ textTransform:"none", letterSpacing:0, fontSize:11, fontWeight:400, color:T.whiteDim }}>(optional but strongly encouraged)</span></label>
+                <div
+                  style={{ padding:"20px", borderRadius:12, border:`2px dashed ${form.reportFile ? T.teal : T.glassBorder}`, textAlign:"center", background: form.reportFile ? T.tealGlow : "rgba(255,255,255,.02)", transition:"all .2s", cursor:"pointer" }}
+                  onClick={() => document.getElementById("report-file-input").click()}
+                >
+                  <input
+                    id="report-file-input"
+                    type="file"
+                    accept=".pdf,.jpg,.jpeg,.png"
+                    style={{ display:"none" }}
+                    onChange={e => {
+                      const file = e.target.files?.[0] || null;
+                      set("reportFile", file);
+                    }}
+                  />
+                  {form.reportFile ? (
+                    <>
+                      <div style={{ fontSize:28, marginBottom:8 }}>✅</div>
+                      <p style={{ fontSize:14, fontWeight:600, color:T.teal, marginBottom:4 }}>{form.reportFile.name}</p>
+                      <p style={{ fontSize:12, color:T.whiteDim, marginBottom:10 }}>
+                        {(form.reportFile.size / 1024).toFixed(0)} KB · Click to change file
+                      </p>
+                      <button
+                        onClick={e => { e.stopPropagation(); set("reportFile", null); document.getElementById("report-file-input").value = ""; }}
+                        style={{ background:"rgba(239,68,68,.12)", border:`1px solid rgba(239,68,68,.3)`, color:"#EF4444", borderRadius:8, padding:"5px 14px", fontSize:12, cursor:"pointer" }}
+                      >
+                        Remove ✕
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <div style={{ fontSize:28, marginBottom:8 }}>📄</div>
+                      <p style={{ fontSize:13, color:T.whiteDim, lineHeight:1.6, marginBottom:12 }}>
+                        Click to upload your most recent school report<br/>
+                        <span style={{ fontSize:11 }}>PDF, JPG or PNG · Helps us personalise your sessions</span>
+                      </p>
+                      <span className="btn-ghost" style={{ display:"inline-block", padding:"9px 20px", fontSize:13, pointerEvents:"none" }}>
+                        Choose File →
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
 
@@ -698,7 +750,7 @@ const ApplicationForm = () => {
                   { label:"Grade",     value:form.grade },
                   { label:"Subjects",  value:form.subjects.join(", ")||"None selected" },
                   { label:"Devices",   value:form.devices.join(", ")||"None selected" },
-                  { label:"Report",    value:form.reportUploaded?"Uploaded ✓":"Not uploaded" },
+                  { label:"Report",    value:form.reportFile ? `${form.reportFile.name} ✓` : "Not attached" },
                   { label:"Heard via", value:form.hearAbout||"Not specified" },
                 ].map(row => (
                   <div key={row.label} style={{ display:"flex", gap:12, alignItems:"flex-start", padding:"8px 0", borderBottom:`1px solid rgba(255,255,255,.05)` }}>

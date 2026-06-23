@@ -29,7 +29,7 @@ const sendConfirmationEmail = async (name, email, role) => {
       to_email:     email,
       student_name: name,
       subject:      "ProveIt! Beta — We've Received Your Application",
-      message:      `Thank you for applying to the ProveIt! Beta Programme!\n\nWe are currently reviewing applications to match ${role === "parent" ? "your child" : "you"} with the right tutor. We will confirm your free 2-week slot within 24 hours.\n\nIn the meantime, if you have any questions, reach us at help.proveit@yahoo.com\n\nThe ProveIt! Team`,
+      message:      `Thank you for applying to the ProveIt! Beta Programme!\n\nWe are currently reviewing applications to match ${role === "parent" ? "your child" : "you"} with the right tutor. We will confirm your free 2-week slot within 24 hours.\n\nIn the meantime, if you have any questions, reach us at help.proveit@yahoo.com`,
       app_url:      window.location.origin,
     });
   } catch(e) { console.error("Email error:", e); }

@@ -506,7 +506,7 @@ const ApplicationForm = () => {
           <p style={{ fontSize:15, color:T.whiteDim, lineHeight:1.75, marginBottom:32 }}>
             KINDLY CHECK YOUR SPAM FOLDER AND CLICK "REPORT AS NOT SPAM".
           </p>
-          </p style={{ fontSize:15, color:T.whiteDim, lineHeight:1.75, marginBottom:32 }}>
+          <p style={{ fontSize:15, color:T.whiteDim, lineHeight:1.75, marginBottom:32 }}>
             We review applications individually and will confirm your slot <strong style={{ color:T.white }}>within 24 hours</strong>. Keep an eye on your inbox — ESPECIALLY your spam folder.
           </p>
           <div style={{ padding:"20px 24px", background:T.tealGlow, border:`1px solid ${T.glassBorder}`, borderRadius:12, marginBottom:28 }}>

@@ -96,6 +96,18 @@ const GlobalStyles = () => (
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{background:${T.navy};color:${T.white};font-family:'Inter',sans-serif;min-height:100vh;overflow-x:hidden}
+p,
+span,
+a{
+  overflow-wrap:break-word;
+}
+
+img,
+svg,
+video{
+  max-width:100%;
+  height:auto;
+}
     ::-webkit-scrollbar{width:5px}
     ::-webkit-scrollbar-track{background:${T.navyMid}}
     ::-webkit-scrollbar-thumb{background:${T.tealDim};border-radius:3px}
@@ -130,7 +142,49 @@ const GlobalStyles = () => (
     section{padding:80px 24px}
     .container{max-width:1100px;margin:0 auto}
     .container-sm{max-width:680px;margin:0 auto}
-    @media(max-width:768px){section{padding:56px 20px}.btn-primary{padding:14px 28px;font-size:15px}}
+    @media(max-width:768px){
+  section{
+    padding:56px 20px;
+  }
+
+  .btn-primary{
+    padding:14px 28px;
+    font-size:15px;
+  }
+
+  .mobile-stack{
+    display:flex !important;
+    flex-direction:column !important;
+  }
+
+  .mobile-grid-1{
+    grid-template-columns:1fr !important;
+  }
+
+  .mobile-grid-2{
+    grid-template-columns:1fr !important;
+  }
+
+  .mobile-grid-3{
+    grid-template-columns:1fr !important;
+  }
+
+  .mobile-center{
+    text-align:center !important;
+  }
+
+  .mobile-padding{
+    padding:20px !important;
+  }
+
+  .mobile-full{
+    width:100% !important;
+  }
+
+  .mobile-small-text{
+    font-size:14px !important;
+  }
+}   
   `}</style>
 );
 
@@ -193,11 +247,25 @@ const Hero = () => (
   <section style={{ minHeight:"100vh", display:"flex", alignItems:"center", position:"relative", overflow:"hidden", paddingTop:80 }}>
     {/* Background effects */}
     <div style={{ position:"absolute", inset:0, backgroundImage:`linear-gradient(rgba(0,212,200,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,200,.025) 1px,transparent 1px)`, backgroundSize:"48px 48px", pointerEvents:"none" }}/>
-    <div style={{ position:"absolute", top:"10%", right:"5%", width:500, height:500, background:"radial-gradient(circle,rgba(0,212,200,.08) 0%,transparent 65%)", pointerEvents:"none" }}/>
-    <div style={{ position:"absolute", bottom:"10%", left:"0%", width:400, height:400, background:"radial-gradient(circle,rgba(255,107,53,.06) 0%,transparent 65%)", pointerEvents:"none" }}/>
+    <div style={{ position:"absolute", top:"10%", right:"5%", width:"50vw",
+height:"50vw",
+maxWidth:500,
+maxHeight:500, background:"radial-gradient(circle,rgba(0,212,200,.08) 0%,transparent 65%)", pointerEvents:"none" }}/>
+    <div style={{ position:"absolute", bottom:"10%", left:"0%",width:"40vw",
+height:"40vw",
+maxWidth:400,
+maxHeight:400, background:"radial-gradient(circle,rgba(255,107,53,.06) 0%,transparent 65%)", pointerEvents:"none" }}/>
 
     <div className="container">
-      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:60, alignItems:"center" }}>
+      <div
+  className="mobile-grid-1"
+  style={{
+    display:"grid",
+    gridTemplateColumns:"1fr 1fr",
+    gap:60,
+    alignItems:"center"
+  }}
+>
         {/* Left */}
         <div>
           <div className="fade-up" style={{ display:"inline-flex", alignItems:"center", gap:8, background:T.tealGlow, border:`1px solid ${T.glassBorder}`, borderRadius:20, padding:"6px 16px", marginBottom:24 }}>
@@ -295,7 +363,15 @@ const MutualAgreement = () => {
         </div>
 
         {/* Table header */}
-        <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:2, marginBottom:2 }}>
+        <div
+  className="mobile-grid-2"
+  style={{
+    display:"grid",
+    gridTemplateColumns:"1fr 1fr",
+    gap:2,
+    marginBottom:2
+  }}
+>
           {[
             { icon:"🎁", label:"What You Receive", color:T.teal },
             { icon:"🤝", label:"What We Ask From You", color:T.accent },
@@ -309,7 +385,15 @@ const MutualAgreement = () => {
 
         {/* Table rows */}
         {rows.map((row, i) => (
-          <div key={i} style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:2, marginBottom:2 }}>
+          <div
+  className="mobile-grid-2"
+  style={{
+    display:"grid",
+    gridTemplateColumns:"1fr 1fr",
+    gap:2,
+    marginBottom:2
+  }}
+>
             <div style={{ padding:"18px 24px", background:"rgba(0,212,200,.04)", border:`1px solid ${T.glassBorder}`, borderRadius:i===rows.length-1?"0 0 0 12px":"0", display:"flex", alignItems:"flex-start", gap:12 }}>
               <span style={{ color:T.teal, fontSize:16, marginTop:1, flexShrink:0 }}>✓</span>
               <span style={{ fontSize:14, color:T.whiteDim, lineHeight:1.65 }}>{row.get}</span>
@@ -348,7 +432,14 @@ const Subjects = () => {
           <h2 className="display" style={{ fontSize:"clamp(26px,3.5vw,40px)", fontWeight:800, letterSpacing:"-1px", marginBottom:14 }}>Three Subjects. One Platform.</h2>
           <p style={{ fontSize:15, color:T.whiteDim, maxWidth:460, margin:"0 auto", lineHeight:1.7 }}>Apply for one, two, or all three. Sessions are tailored to exactly where you are and where you need to be.</p>
         </div>
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:20 }}>
+        <div
+  className="mobile-grid-3"
+  style={{
+    display:"grid",
+    gridTemplateColumns:"repeat(3,1fr)",
+    gap:20
+  }}
+>
           {subjects.map(s => (
             <div key={s.name} className="glass" style={{ padding:28, borderTop:`3px solid ${s.color}`, transition:"transform .25s" }}
               onMouseEnter={e=>e.currentTarget.style.transform="translateY(-4px)"}
@@ -563,7 +654,10 @@ const ApplicationForm = () => {
           <SpotsCounter/>
         </div>
 
-        <div className="glass" style={{ padding:"36px 40px" }}>
+        <div
+  className="glass mobile-padding"
+  style={{ padding:"36px 40px" }}
+>
           <StepIndicator/>
           <div style={{ textAlign:"center", marginBottom:28 }}>
             <span style={{ fontSize:12, color:T.teal, fontWeight:600, letterSpacing:"1px", textTransform:"uppercase" }}>Step {step} of 3 — {stepLabels[step]}</span>
@@ -827,7 +921,15 @@ const FAQ = () => {
 // ─── FOOTER ───────────────────────────────────────────────────────────────────
 const Footer = () => (
   <footer style={{ background:T.navyMid, borderTop:`1px solid ${T.glassBorder}`, padding:"48px 24px" }}>
-    <div className="container" style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:40, marginBottom:40 }}>
+    <div
+  className="container mobile-grid-3"
+  style={{
+    display:"grid",
+    gridTemplateColumns:"1fr 1fr 1fr",
+    gap:40,
+    marginBottom:40
+  }}
+>
       <div>
         <div style={{ display:"flex", alignItems:"center", gap:10, marginBottom:16 }}>
           <svg width={24} height={24} viewBox="0 0 24 24" fill="none"><polygon points="12,2 22,8 22,16 12,22 2,16 2,8" stroke={T.teal} strokeWidth="2"/><circle cx="12" cy="12" r="2" fill={T.teal}/></svg>

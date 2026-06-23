@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 const CONFIG = {
   totalSlots:        100,   // total applications before form closes
   acceptedSlots:     80,    // how many will actually be accepted
-  applicationsCount: 10,    // UPDATE THIS NUMBER as applications come in
+  applicationsCount: 1,    // UPDATE THIS NUMBER as applications come in
   sheetsWebhook:     "https://script.google.com/macros/s/AKfycbyUHWIJFicss4f-1gnKycvE_kJAafmVVXYMYvfrbPWphXxpw6X4QZTAjNj1rhH2akiphw/exec",
   emailjsPublicKey:  "6KYo6SqjlDABOmVpE",
   emailjsServiceId:  "proveit_gmail",
@@ -211,10 +211,10 @@ const Hero = () => (
           </h1>
 
           <p className="fade-up-2" style={{ fontSize:18, color:T.whiteDim, lineHeight:1.75, marginBottom:16, maxWidth:520 }}>
-            <strong style={{ color:T.white }}>80 spots. Zero cost. One condition: show up.</strong>
+            <strong style={{ color:T.white }}>80 spots. Zero cost. One condition: show up!</strong>
           </p>
           <p className="fade-up-2" style={{ fontSize:16, color:T.whiteDim, lineHeight:1.75, marginBottom:36, maxWidth:520 }}>
-            ProveIt! is giving away 2 weeks of elite, personalised Grade 12 tutoring to students committed enough to help us build something great. You get premium lessons in Maths, Physics and Chemistry. We get honest feedback.
+            ProveIt! is giving away 2 weeks of elite, personalised Grade 12 tutoring to students committed enough to help us build something great. You get premium lessons in Mathematics, Physics and Chemistry. We get honest feedback.
           </p>
 
           <div className="fade-up-3" style={{ display:"flex", gap:14, flexWrap:"wrap", marginBottom:36 }}>
@@ -243,7 +243,7 @@ const Hero = () => (
             <div style={{ textAlign:"center", marginBottom:28 }}>
               <div style={{ fontSize:48, marginBottom:8 }}>🚀</div>
               <div className="display" style={{ fontSize:22, fontWeight:700, marginBottom:6 }}>Beta Applications Open</div>
-              <p style={{ fontSize:14, color:T.whiteDim, lineHeight:1.6 }}>Applications are reviewed individually. Not all will be accepted — only committed learners get a slot.</p>
+              <p style={{ fontSize:14, color:T.whiteDim, lineHeight:1.6 }}>Applications are reviewed individually. Only committed learners get a slot.</p>
             </div>
 
             <SpotsCounter style={{ marginBottom:24 }}/>
@@ -251,8 +251,8 @@ const Hero = () => (
             <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr 1fr", gap:10 }}>
               {[
                 { label:"Subjects", value:"3" },
-                { label:"Duration", value:"2 wks" },
-                { label:"Cost", value:"R0" },
+                { label:"Duration", value:"2 weeks" },
+                { label:"Cost", value:"R0.00" },
               ].map(x => (
                 <div key={x.label} style={{ textAlign:"center", padding:"14px 8px", background:"rgba(255,255,255,.04)", borderRadius:10, border:`1px solid ${T.glassBorder}` }}>
                   <div className="display" style={{ fontSize:22, fontWeight:700, color:T.teal, marginBottom:2 }}>{x.value}</div>
@@ -324,7 +324,7 @@ const MutualAgreement = () => {
         {/* Bottom note */}
         <div style={{ marginTop:24, padding:"18px 24px", background:T.tealGlow, border:`1px solid ${T.glassBorder}`, borderRadius:12, textAlign:"center" }}>
           <p style={{ fontSize:14, color:T.whiteDim, lineHeight:1.7 }}>
-            <strong style={{ color:T.white }}>Not all applications are accepted.</strong> We review each one individually and confirm within 24 hours. If your slot is confirmed, you'll receive login details to the ProveIt! platform by email from <span style={{ color:T.teal }}>info.proveit@yahoo.com</span>
+            <strong style={{ color:T.white }}>Not all applications will be accepted.</strong> We review each one individually and confirm within 24 hours. If your slot is confirmed, you'll receive login details to the ProveIt! platform by email from <span style={{ color:T.teal }}>info.proveit@yahoo.com</span>
           </p>
         </div>
       </div>
@@ -375,7 +375,7 @@ const Subjects = () => {
 const HowItWorks = () => {
   const steps = [
     { n:"01", icon:"📝", title:"Apply", desc:"Fill in the application form below. It takes about 3 minutes. Upload your most recent school report to help us personalise your sessions." },
-    { n:"02", icon:"✅", title:"Get Confirmed", desc:"We review your application and confirm your slot within 24 hours by email. Only committed applicants are accepted." },
+    { n:"02", icon:"✅", title:"Get Confirmed", desc:"We review your application and confirm your slot within 24 hours by email." },
     { n:"03", icon:"🔐", title:"Get Access", desc:"Once accepted, you receive login details to the ProveIt! platform. Your tutor will reach out to schedule your first session." },
     { n:"04", icon:"📚", title:"Learn & Test", desc:"Attend your sessions, explore the platform, and test features as guided. Your tutor tracks your progress the whole way." },
     { n:"05", icon:"📊", title:"Give Feedback", desc:"Complete a short survey after your final session. Your input directly shapes the platform before it launches to the public." },
@@ -672,7 +672,7 @@ const ApplicationForm = () => {
               </div>
 
               <div>
-                <label>School Report <span style={{ textTransform:"none", letterSpacing:0, fontSize:11, fontWeight:400, color:T.whiteDim }}>(optional but strongly encouraged)</span></label>
+                <label>School Report <span style={{ textTransform:"none", letterSpacing:0, fontSize:11, fontWeight:400, color:T.whiteDim }}>(strongly encouraged)</span></label>
                 <div
                   style={{ padding:"20px", borderRadius:12, border:`2px dashed ${form.reportFile ? T.teal : T.glassBorder}`, textAlign:"center", background: form.reportFile ? T.tealGlow : "rgba(255,255,255,.02)", transition:"all .2s", cursor:"pointer" }}
                   onClick={() => document.getElementById("report-file-input").click()}
@@ -787,7 +787,7 @@ const FAQ = () => {
   const [open, setOpen] = useState(null);
   const faqs = [
     { q:"Is this really completely free?", a:"Yes — 100% free. No hidden fees, no credit card, no catch. You're helping us test the platform and in exchange you get 2 weeks of personalised tutoring at no cost." },
-    { q:"What exactly does a session look like?", a:"Sessions are live, one-on-one via Microsoft Teams. Your tutor will cover exactly what you need based on your school report and where you are in the curriculum. Sessions are also recorded so you can rewatch them." },
+    { q:"What exactly does a session look like?", a:"Sessions are live, one-on-one via Google Meet/Microsoft Teams. Your tutor will cover exactly what you need based on your school report and where you are in the curriculum. Sessions are also recorded so you can rewatch them." },
     { q:"I'm in Grade 12 but I didn't get great marks last term. Can I still apply?", a:"Absolutely. We're not looking for top students only — we're looking for committed students. Your current results help us understand where to focus, not whether you qualify." },
     { q:"Will I get a report at the end?", a:"Yes. At the end of your 2 weeks, your tutor will provide a written progress report showing what you covered, where you improved, and what to focus on next." },
     { q:"What if I can only attend some sessions, not all?", a:"We need committed testers, so consistent attendance is important. If something comes up, communicate with your tutor within 24 hours. Persistent no-shows may result in your slot being reassigned." },

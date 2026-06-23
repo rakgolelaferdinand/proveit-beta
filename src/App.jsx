@@ -6,9 +6,9 @@ const CONFIG = {
   acceptedSlots:     80,    // how many will actually be accepted
   applicationsCount: 1,    // UPDATE THIS NUMBER as applications come in
   sheetsWebhook:     "https://script.google.com/macros/s/AKfycbyUHWIJFicss4f-1gnKycvE_kJAafmVVXYMYvfrbPWphXxpw6X4QZTAjNj1rhH2akiphw/exec",
-  emailjsPublicKey:  "6KYo6SqjlDABOmVpE",
-  emailjsServiceId:  "proveit_gmail",
-  emailjsTemplateId: "proveit_notify",
+  emailjsPublicKey:  "oTMW3y4KeQz57nKIz",
+  emailjsServiceId:  "proveitbeta_gmail",
+  emailjsTemplateId: "proveitbeta_notify",
 };
 
 // ─── EMAILJS ─────────────────────────────────────────────────────────────────

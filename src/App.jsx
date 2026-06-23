@@ -504,7 +504,10 @@ const ApplicationForm = () => {
             Thank you, <strong style={{ color:T.white }}>{form.name}</strong>. We've received your application and sent a confirmation to <strong style={{ color:T.teal }}>{form.email}</strong>.
           </p>
           <p style={{ fontSize:15, color:T.whiteDim, lineHeight:1.75, marginBottom:32 }}>
-            Kidly check your Spam folder and report as not spam. We review applications individually and will confirm your slot <strong style={{ color:T.white }}>within 24 hours</strong>. Keep an eye on your inbox — including your spam folder.
+            KINDLY CHECK YOUR SPAM FOLDER AND CLICK "REPORT AS NOT SPAM".
+          </p>
+          </p style={{ fontSize:15, color:T.whiteDim, lineHeight:1.75, marginBottom:32 }}>
+            We review applications individually and will confirm your slot <strong style={{ color:T.white }}>within 24 hours</strong>. Keep an eye on your inbox — ESPECIALLY your spam folder.
           </p>
           <div style={{ padding:"20px 24px", background:T.tealGlow, border:`1px solid ${T.glassBorder}`, borderRadius:12, marginBottom:28 }}>
             <p style={{ fontSize:14, color:T.whiteDim }}>
@@ -787,7 +790,7 @@ const FAQ = () => {
   const [open, setOpen] = useState(null);
   const faqs = [
     { q:"Is this really completely free?", a:"Yes — 100% free. No hidden fees, no credit card, no catch. You're helping us test the platform and in exchange you get 2 weeks of personalised tutoring at no cost." },
-    { q:"What exactly does a session look like?", a:"Sessions are live, one-on-one via Google Meet/Microsoft Teams. Your tutor will cover exactly what you need based on your school report and where you are in the curriculum. Sessions are also recorded so you can rewatch them." },
+    { q:"What exactly does a session look like?", a:"Sessions are live, 1-on-1/Group Google Meet/Microsoft Teams lessons. Your tutor will cover exactly what you need based on your school report and where you are in the curriculum. Sessions are also recorded so you can rewatch them." },
     { q:"I'm in Grade 12 but I didn't get great marks last term. Can I still apply?", a:"Absolutely. We're not looking for top students only — we're looking for committed students. Your current results help us understand where to focus, not whether you qualify." },
     { q:"Will I get a report at the end?", a:"Yes. At the end of your 2 weeks, your tutor will provide a written progress report showing what you covered, where you improved, and what to focus on next." },
     { q:"What if I can only attend some sessions, not all?", a:"We need committed testers, so consistent attendance is important. If something comes up, communicate with your tutor within 24 hours. Persistent no-shows may result in your slot being reassigned." },

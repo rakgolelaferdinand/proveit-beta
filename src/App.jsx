@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from "react";
 // ─── CONFIG — edit these to update the counter and settings ──────────────────
 const CONFIG = {
   totalSlots:        100,   // total applications before form closes
-  acceptedSlots:     80,    // how many will actually be accepted
+  acceptedSlots:     50,    // how many will actually be accepted
   applicationsCount: 1,    // UPDATE THIS NUMBER as applications come in
   sheetsWebhook:     "https://script.google.com/macros/s/AKfycbyUHWIJFicss4f-1gnKycvE_kJAafmVVXYMYvfrbPWphXxpw6X4QZTAjNj1rhH2akiphw/exec",
   emailjsPublicKey:  "oTMW3y4KeQz57nKIz",
@@ -160,7 +160,7 @@ const Nav = () => {
 const SpotsCounter = ({ style }) => {
   const pct = Math.min((CONFIG.applicationsCount / CONFIG.totalSlots) * 100, 100);
   const remaining = CONFIG.acceptedSlots - CONFIG.applicationsCount;
-  const urgency = CONFIG.applicationsCount >= 70;
+  const urgency = CONFIG.applicationsCount >= 40;
 
   return (
     <div style={{ background: urgency ? "rgba(239,68,68,.08)" : T.tealGlow, border:`1px solid ${urgency ? "rgba(239,68,68,.3)" : T.glassBorder}`, borderRadius:16, padding:"20px 24px", ...style }}>
@@ -211,7 +211,7 @@ const Hero = () => (
           </h1>
 
           <p className="fade-up-2" style={{ fontSize:18, color:T.whiteDim, lineHeight:1.75, marginBottom:16, maxWidth:520 }}>
-            <strong style={{ color:T.white }}>80 spots. Zero cost. One condition: SHOW UP!</strong>
+            <strong style={{ color:T.white }}>50 spots. Zero cost. One condition: SHOW UP!</strong>
           </p>
           <p className="fade-up-2" style={{ fontSize:16, color:T.whiteDim, lineHeight:1.75, marginBottom:36, maxWidth:520 }}>
             ProveIt! is giving away 2 weeks of elite, personalised Grade 12 tutoring to students committed enough to help us build something great. You get premium lessons in Mathematics, Physics and Chemistry. We get honest feedback.
@@ -871,7 +871,7 @@ const CTABanner = () => (
         Ready to <span style={{ color:T.teal }}>ProveIt!</span>?
       </h2>
       <p style={{ fontSize:16, color:T.whiteDim, marginBottom:32, lineHeight:1.7, maxWidth:480, margin:"0 auto 32px" }}>
-        80 spots. Free tutoring. Two weeks. The only question is whether you'll show up.
+        50 spots. Free tutoring. Two weeks. The only question is whether you'll show up.
       </p>
       <SpotsCounter style={{ maxWidth:480, margin:"0 auto 28px" }}/>
       <a href="#apply" className="btn-primary" style={{ textDecoration:"none", fontSize:17, padding:"16px 44px" }}>Apply Now — It's Free →</a>

@@ -211,7 +211,7 @@ const Hero = () => (
           </h1>
 
           <p className="fade-up-2" style={{ fontSize:18, color:T.whiteDim, lineHeight:1.75, marginBottom:16, maxWidth:520 }}>
-            <strong style={{ color:T.white }}>80 spots. Zero cost. One condition: show up!</strong>
+            <strong style={{ color:T.white }}>80 spots. Zero cost. One condition: SHOW UP!</strong>
           </p>
           <p className="fade-up-2" style={{ fontSize:16, color:T.whiteDim, lineHeight:1.75, marginBottom:36, maxWidth:520 }}>
             ProveIt! is giving away 2 weeks of elite, personalised Grade 12 tutoring to students committed enough to help us build something great. You get premium lessons in Mathematics, Physics and Chemistry. We get honest feedback.
@@ -504,7 +504,7 @@ const ApplicationForm = () => {
             Thank you, <strong style={{ color:T.white }}>{form.name}</strong>. We've received your application and sent a confirmation to <strong style={{ color:T.teal }}>{form.email}</strong>.
           </p>
           <p style={{ fontSize:15, color:T.whiteDim, lineHeight:1.75, marginBottom:32 }}>
-            KINDLY CHECK YOUR SPAM FOLDER AND CLICK "REPORT AS NOT SPAM".
+            KINDLY CHECK YOUR SPAM FOLDER AND CLICK <strong style={{ color:T.white }}>"REPORT AS NOT SPAM"</strong>.
           </p>
           <p style={{ fontSize:15, color:T.whiteDim, lineHeight:1.75, marginBottom:32 }}>
             We review applications individually and will confirm your slot <strong style={{ color:T.white }}>within 24 hours</strong>. Keep an eye on your inbox — ESPECIALLY your spam folder.

@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from "react";
 const CONFIG = {
   totalSlots:        50,   // total applications before form closes
   acceptedSlots:     50,    // how many will actually be accepted
-  applicationsCount: 39,    // UPDATE THIS NUMBER as applications come in
+  applicationsCount: 50,    // UPDATE THIS NUMBER as applications come in
   sheetsWebhook:     "https://script.google.com/macros/s/AKfycbyUHWIJFicss4f-1gnKycvE_kJAafmVVXYMYvfrbPWphXxpw6X4QZTAjNj1rhH2akiphw/exec",
   emailjsPublicKey:  "oTMW3y4KeQz57nKIz",
   emailjsServiceId:  "proveitbeta_gmail",
